@@ -41,17 +41,14 @@ const useScrollReveal = ({
     const ctx = gsap.context(() => {
       if (!isLast) {
         // Create the curtain reveal effect
-        // Clip animation based on virtual scroll position for this section
+        // Using CSS custom property for better performance (avoids gsap.set overhead)
         ScrollTrigger.create({
           start: () => sectionIndex * window.innerHeight,
           end: () => (sectionIndex + 1) * window.innerHeight,
           scrub: scrub,
           onUpdate: (self) => {
-            // Clip from top based on scroll progress
-            const progress = self.progress;
-            gsap.set(section, {
-              clipPath: `inset(${progress * 100}% 0% 0% 0%)`,
-            });
+            // Clip from bottom - update CSS variable directly
+            section.style.setProperty('--clip-progress', `${self.progress * 100}%`);
           },
         });
       }
