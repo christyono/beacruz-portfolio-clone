@@ -1,4 +1,4 @@
-import section1 from "../images/section_1.png";
+import section1 from "../images/section_1.jpg";
 import useScrollReveal from "../hooks/useScrollReveal";
 
 const HeroSection = ({ zIndex = 10 }) => {

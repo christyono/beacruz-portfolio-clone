@@ -5,7 +5,7 @@ import AboutSection from "./components/AboutSection";
 import PressLogos from "./components/PressLogos";
 import Footer from "./components/Footer";
 
-import section1 from "./images/section_1.png";
+import section1 from "./images/section_1.jpg";
 import section2 from "./images/section-2.jpg";
 import section3 from "./images/section-3.jpg";
 import section4 from "./images/section-4.jpg";

@@ -1,5 +1,5 @@
 import sothebysLogo from "../images/press/sothebys.png";
-import graziaLogo from "../images/press/grazia.png";
+import graziaLogo from "../images/press/grazia.jpg";
 import cbs8Logo from "../images/press/cbs8.png";
 import manilatimesLogo from "../images/press/manilatimes.png";
 import businessmirrorLogo from "../images/press/businessmirror.jpg";
