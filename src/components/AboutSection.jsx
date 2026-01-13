@@ -1,8 +1,11 @@
 import selfPortrait from "../images/self_portrait.jpg";
-import useParallax from "../hooks/useParallax";
+import useScrollReveal from "../hooks/useScrollReveal";
 
-const AboutSection = () => {
-  const { ref, style } = useParallax(0.2);
+const AboutSection = ({ zIndex = 1 }) => {
+  const { sectionRef, backgroundRef } = useScrollReveal({
+    parallaxSpeed: 0.2,
+    isLast: true,
+  });
 
   const socialLinks = [
     { label: "cv", href: "#cv" },
@@ -11,13 +14,18 @@ const AboutSection = () => {
   ];
 
   return (
-    <section ref={ref} id="about" className="relative min-h-screen bg-neutral-800 overflow-hidden">
-      {/* Background with subtle texture and Parallax */}
+    <section
+      ref={sectionRef}
+      id="about"
+      className="relative min-h-screen bg-neutral-800 overflow-hidden"
+      style={{ zIndex }}
+    >
+      {/* Background with subtle texture */}
       <div
-        className="absolute inset-0 bg-cover bg-center opacity-20 scale-110"
+        ref={backgroundRef}
+        className="curtain-bg absolute inset-0 bg-cover bg-center opacity-20 scale-110"
         style={{
           backgroundImage: `url('https://images.unsplash.com/photo-1558171813-4c088753af8f?w=1920&q=80')`,
-          ...style,
         }}
       />
 
@@ -99,12 +107,6 @@ const AboutSection = () => {
         </div>
       </div>
 
-      {/* Fixed Logo (Desktop) */}
-      <div className="hidden md:block absolute top-8 right-6 lg:right-12">
-        <span className="text-white/90 text-5xl lg:text-7xl font-serif tracking-tight">
-          <span className="text-mint">/</span>beacruz
-        </span>
-      </div>
     </section>
   );
 };

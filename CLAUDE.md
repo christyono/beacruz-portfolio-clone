@@ -66,3 +66,17 @@ src/
 - Auto-scrolling press logo marquee
 - Contact modal with mailto: integration
 - Responsive design (mobile-first)
+
+## Validation Testing
+
+**Use Playwright MCP to validate changes after each coding session.**
+
+After making changes to the site, use the Playwright MCP tools to verify the changes work correctly:
+
+1. Start the dev server with `bun run dev`
+2. Use `browser_navigate` to open the local dev URL (typically http://localhost:5173)
+3. Use `browser_snapshot` to capture the accessibility tree and verify content renders correctly
+4. Test interactive elements (contact modal, navigation, etc.) using `browser_click` and other interaction tools
+5. Use `browser_console_messages` to check for any JavaScript errors
+
+This ensures visual and functional changes are validated before committing.

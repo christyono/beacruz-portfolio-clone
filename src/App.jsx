@@ -60,18 +60,40 @@ const portfolioItems = [
 ];
 
 function App() {
+  // Calculate z-index values for curtain stacking effect
+  // Higher z-index = on top, gets revealed first
+  const totalSections = portfolioItems.length + 2; // hero + portfolio cards + about
+  // Total scroll height needed: each section needs 100vh of scroll
+  const scrollHeight = totalSections * 100; // in vh units
+
   return (
     <div className="relative">
       <Header />
-      <HeroSection />
 
-      {portfolioItems.map((item) => (
-        <PortfolioCard key={item.id} {...item} />
+      {/* Scroll spacer - creates scrollable area for fixed sections */}
+      <div style={{ height: `${scrollHeight}vh` }} aria-hidden="true" />
+
+      {/* Hero gets highest z-index - revealed first */}
+      <HeroSection zIndex={totalSections} />
+
+      {/* Portfolio cards get descending z-index */}
+      {portfolioItems.map((item, index) => (
+        <PortfolioCard
+          key={item.id}
+          {...item}
+          zIndex={totalSections - 1 - index}
+          isLast={false}
+        />
       ))}
 
-      <AboutSection />
-      <PressLogos />
-      <Footer />
+      {/* About section is revealed last - lowest z-index */}
+      <AboutSection zIndex={1} />
+
+      {/* Non-fixed sections at the end */}
+      <div style={{ position: 'relative', zIndex: totalSections + 10 }}>
+        <PressLogos />
+        <Footer />
+      </div>
     </div>
   );
 }

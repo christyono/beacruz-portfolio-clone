@@ -12,6 +12,7 @@ body {
   font-family: "Inter", system-ui, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  background-color: #1a1a1a;
 }
 
 .font-serif {
@@ -34,4 +35,38 @@ body {
 
 ::-webkit-scrollbar-thumb:hover {
   background: #7a9a7a;
+}
+
+/* Curtain reveal sections - fixed position for stacking */
+.curtain-section {
+  position: fixed !important;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100vh;
+  will-change: clip-path;
+  backface-visibility: hidden;
+}
+
+/* GSAP creates pin-spacer wrapper - ensure it doesn't interfere */
+.pin-spacer {
+  position: static !important;
+  height: 100vh !important;
+  width: 100% !important;
+}
+
+/* GPU acceleration for scroll reveal backgrounds */
+.curtain-bg,
+.scale-110 {
+  will-change: clip-path, transform;
+  backface-visibility: hidden;
+}
+
+/* Reduced motion support */
+@media (prefers-reduced-motion: reduce) {
+  .curtain-bg,
+  .scale-110 {
+    clip-path: inset(0% 0% 0% 0%) !important;
+    transform: none !important;
+  }
 }

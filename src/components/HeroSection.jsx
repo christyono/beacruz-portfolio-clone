@@ -1,27 +1,25 @@
 import section1 from "../images/section_1.png";
-import useParallax from "../hooks/useParallax";
+import useScrollReveal from "../hooks/useScrollReveal";
 
-const HeroSection = () => {
-  const { ref, style } = useParallax(0.3);
+const HeroSection = ({ zIndex = 10 }) => {
+  const { sectionRef, backgroundRef } = useScrollReveal({
+    parallaxSpeed: 0.3,
+    isLast: false,
+  });
 
   return (
-    <section ref={ref} className="relative h-screen w-full overflow-hidden">
-      {/* Background Image with Parallax */}
+    <section
+      ref={sectionRef}
+      className="curtain-section relative h-screen w-full overflow-hidden"
+      style={{ zIndex }}
+    >
+      {/* Background Image with Curtain Reveal */}
       <div
-        className="absolute inset-0 bg-cover bg-center bg-no-repeat scale-110"
-        style={{
-          backgroundImage: `url(${section1})`,
-          ...style,
-        }}
+        ref={backgroundRef}
+        className="curtain-bg absolute inset-0 bg-cover bg-center bg-no-repeat scale-110"
+        style={{ backgroundImage: `url(${section1})` }}
       >
         <div className="absolute inset-0 bg-black/10" />
-      </div>
-
-      {/* Mobile Logo */}
-      <div className="md:hidden absolute bottom-20 left-0 right-0 text-center">
-        <span className="text-white text-4xl font-serif tracking-tight">
-          <span className="text-mint">/</span>beacruz
-        </span>
       </div>
 
       {/* Scroll Indicator */}

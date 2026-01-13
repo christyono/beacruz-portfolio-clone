@@ -1,5 +1,6 @@
 import { useState } from "react";
 import ContactModal from "./ContactModal";
+import logo from "../images/bea_cruz_logo_circle.png";
 
 const Header = () => {
   const [isContactOpen, setIsContactOpen] = useState(false);
@@ -41,13 +42,18 @@ const Header = () => {
         </nav>
 
         {/* Logo */}
-        <div className="hidden md:block">
+        <div className="hidden md:flex items-center gap-2">
           <a
             href="#"
-            className="text-white text-6xl lg:text-8xl font-serif tracking-tight"
+            className="text-white text-sm md:text-base font-serif tracking-tight"
           >
             <span className="text-mint">/</span>beacruz
           </a>
+          <img
+            src={logo}
+            alt="Beacruz logo"
+            className="w-8 h-8 md:w-10 md:h-10 object-contain"
+          />
         </div>
       </header>
 

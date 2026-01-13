@@ -1,17 +1,22 @@
-import useParallax from "../hooks/useParallax";
+import useScrollReveal from "../hooks/useScrollReveal";
 
-const PortfolioCard = ({ title, linkText, href, bgImage }) => {
-  const { ref, style } = useParallax(0.4);
+const PortfolioCard = ({ title, linkText, href, bgImage, zIndex = 1, isLast = false }) => {
+  const { sectionRef, backgroundRef } = useScrollReveal({
+    parallaxSpeed: 0.4,
+    isLast,
+  });
 
   return (
-    <section ref={ref} className="relative h-screen w-full overflow-hidden">
-      {/* Background Image with Parallax */}
+    <section
+      ref={sectionRef}
+      className="curtain-section relative h-screen w-full overflow-hidden"
+      style={{ zIndex }}
+    >
+      {/* Background Image with Curtain Reveal */}
       <div
-        className="absolute inset-0 bg-cover bg-center bg-no-repeat scale-110 transition-all duration-700"
-        style={{
-          backgroundImage: `url('${bgImage}')`,
-          ...style,
-        }}
+        ref={backgroundRef}
+        className="curtain-bg absolute inset-0 bg-cover bg-center bg-no-repeat scale-110"
+        style={{ backgroundImage: `url('${bgImage}')` }}
       >
         <div className="absolute inset-0 bg-black/20" />
       </div>
@@ -36,12 +41,6 @@ const PortfolioCard = ({ title, linkText, href, bgImage }) => {
         </a>
       </div>
 
-      {/* Fixed Logo (Desktop) */}
-      <div className="hidden md:block absolute top-6 right-6 lg:right-12 lg:top-8">
-        <span className="text-white text-5xl lg:text-7xl xl:text-8xl font-serif tracking-tight">
-          <span className="text-mint">/</span>beacruz
-        </span>
-      </div>
     </section>
   );
 };
